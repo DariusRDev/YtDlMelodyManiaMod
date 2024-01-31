@@ -2,7 +2,10 @@
 bin/
 obj/
 *.sln
+.vscode/
 
 # Ignore Unity meta files
 *.meta
+
+# dont publish yt-dlp.exe
 yt-dlp.exe

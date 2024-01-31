@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using UniInject;
@@ -28,6 +29,10 @@ public class YtDlMelodyManiaModSceneMod : IContextMenuMod
 
     [Inject]
     private SongMetaManager songMetaManager;
+
+    [Inject]
+    private UiManager uiManager;
+
     private readonly List<IDisposable> disposables = new List<IDisposable>();
 
 
@@ -43,7 +48,35 @@ public class YtDlMelodyManiaModSceneMod : IContextMenuMod
                 {
                     return;
                 }
-                contextMenu.AddButton("YT-Download", "download", async () => await DownloadVideo(songSelectSongEntry.SongMeta));
+                string youtubeDLPath = $"{modContext.ModFolder}\\yt-dlp.exe";
+
+
+                contextMenu.AddButton("YT-Download", "download", async () =>
+                {
+                    if (File.Exists(youtubeDLPath))
+                    {
+                        await DownloadVideo(songSelectSongEntry.SongMeta);
+                    }
+                    else
+                    {
+                        MessageDialogControl messageDialogControl = uiManager.CreateDialogControl("'yt-dlp.exe' not found");
+                        VisualElement content = new VisualElement();
+                        content.Add(new Label(@"This mod uses the Yt-Dlp Project to downlaod YouTube Videos.
+Please download 'yt-dlp.exe' from Github and place it in the mod folder.
+https://github.com/yt-dlp/yt-dlp/releases"));
+                        Button button = new Button(() => Application.OpenURL("https://github.com/yt-dlp/yt-dlp/releases"));
+                        button.text = "Open Github (yt-dlp.exe)";
+                        content.Add(button);
+                        button.AddToClassList("mb-2");
+                        button.AddToClassList("mt-2");
+                        Button openModFolder = new Button(() => Application.OpenURL(modContext.ModFolder));
+                        openModFolder.text = "Open Mod Folder";
+                        content.Add(openModFolder);
+                        messageDialogControl.AddVisualElement(content);
+                    }
+                });
+
+
 
             }
         }

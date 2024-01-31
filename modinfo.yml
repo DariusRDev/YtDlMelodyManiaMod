@@ -1,9 +1,9 @@
 name: Youtube Downloader
 version: 1.0.0
-description: Downlaod the YT-Video from WEBSITE tag
+description: Download the YT-Video from WEBSITE tag. Only download videos that you have the rights to. This mod is only for personal use. 
 website: https://github.com/derdorius
 authors:
-  - DerDorius
+  - Darius Rohde
   - github.com/derdorius
 # Additional assemblies from the app domain that need to be accessed by your mod.
 requiredAssemblies:
