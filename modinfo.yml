@@ -1,0 +1,19 @@
+name: Youtube Downloader
+version: 1.0.0
+description: Downlaod the YT-Video from WEBSITE tag
+website: https://github.com/derdorius
+authors:
+  - DerDorius
+  - github.com/derdorius
+# Additional assemblies from the app domain that need to be accessed by your mod.
+requiredAssemblies:
+  - System.Net.Http
+  - System.Threading
+requiredTypes:
+  - System.Diagnostics.Process
+  - System.Diagnostics.DataReceivedEventArgs
+  - System.Threading.Interlocked
+  - System.Threading.Tasks.TaskCompletionSource`1
+  - System.Diagnostics.ProcessStartInfo
+  - System.Environment
+  - System.Globalization.CultureInfo
